@@ -18,6 +18,11 @@
     </ion-select>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Time Limit enabled</ion-label>
+    <ion-toggle [checked]="timeLimitEnabled" (ionChange)="enableTimeLimit($event)"></ion-toggle>
+  </ion-item>
+
   <ion-item *ngIf="playerAmount > 2">
     <ion-label>Teams enabled</ion-label>
     <ion-toggle [checked]="teamsEnabled" (ionChange)="setTeam($event)"></ion-toggle>
@@ -28,10 +33,10 @@
     <ion-input (ionBlur)="setLifePoints($event)" min="1" type="number" [value]="lifePoints" inputmode="numeric"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Time Limit in Seconds</ion-label>
-    <ion-input (ionBlur)="setTimeLimit($event)" min="60" type="number" [value]="timeLimit" inputmode="numeric"
-               placeholder="Amount in seconds (min 60)"></ion-input>
+  <ion-item *ngIf="timeLimitEnabled">
+    <ion-label position="floating">Time Limit in Minutes</ion-label>
+    <ion-input (ionBlur)="setTimeLimit($event)" min="5" type="number" [value]="timeLimit" inputmode="numeric"
+               placeholder="Amount in minutes (min 5)"></ion-input>
   </ion-item>
 
   <ion-list style="margin: 0; padding: 0;">

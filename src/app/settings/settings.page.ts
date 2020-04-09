@@ -13,7 +13,7 @@ export class SettingsPage {
 
   @ViewChild(IonReorderGroup, {static: false}) reorderGroup: IonReorderGroup;
 
-  playerOptions = [
+  public playerOptions = [
     {player: '1 Player', amount: 1},
     {player: '2 Players', amount: 2},
     {player: '3 Players', amount: 3},
@@ -21,11 +21,12 @@ export class SettingsPage {
   ];
 
   // Default values for first boot
-  playerAmount: number = 2;
-  lifePoints = 8000;
-  timeLimit: number = 180;
-  teamsEnabled: boolean = false;
-  names = [
+  public playerAmount: number = 2;
+  public lifePoints = 8000;
+  public timeLimit: number = 30;
+  public teamsEnabled: boolean = false;
+  public timeLimitEnabled: boolean = false;
+  public names = [
       {playerId: 1, name: 'Duelist 1', team: 1},
       {playerId: 2, name: 'Duelist 2', team: 1},
       {playerId: 3, name: 'Duelist 3', team: 2},
@@ -69,6 +70,12 @@ export class SettingsPage {
         this.teamsEnabled = data
       }
     });
+
+    this.storage.get('timeLimitEnabled').then(data => {
+      if(data != null) {
+        this.timeLimitEnabled = data
+      }
+    });
   }
 
 
@@ -94,8 +101,8 @@ export class SettingsPage {
 
   setTimeLimit(event: any) {
     let time = event.target.value;
-    if (time < 60) {
-      this.timeLimit = 60;
+    if (time < 5) {
+      this.timeLimit = 5;
     } else {
       this.timeLimit = time;
     }
@@ -105,5 +112,10 @@ export class SettingsPage {
   setTeam(event: any) {
     this.teamsEnabled = event.target.checked;
     this.storage.set('teamsEnabled', this.teamsEnabled);
+  }
+
+  enableTimeLimit(event: any) {
+    this.timeLimitEnabled = event.target.checked;
+    this.storage.set('timeLimitEnabled', this.timeLimitEnabled)
   }
 }
