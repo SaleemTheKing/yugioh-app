@@ -1,5 +1,7 @@
 {
   "name": "yugioh-v2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

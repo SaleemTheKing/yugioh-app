@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Settings</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-label>Players</ion-label>
+    <ion-select (ionChange)="setPlayers($event)" [value]="playerAmount" placeholder="Select Players">
+      <ion-select-option  [value]="player.amount" *ngFor="let player of playerOptions">{{player.player}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="playerAmount > 2">
+    <ion-label>Teams enabled</ion-label>
+    <ion-toggle [checked]="teamsEnabled" (ionChange)="setTeam($event)"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Life Points per Duelist</ion-label>
+    <ion-input (ionBlur)="setLifePoints($event)" min="1" type="number" [value]="lifePoints" inputmode="numeric"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Time Limit in Seconds</ion-label>
+    <ion-input (ionBlur)="setTimeLimit($event)" min="60" type="number" [value]="timeLimit" inputmode="numeric"
+               placeholder="Amount in seconds (min 60)"></ion-input>
+  </ion-item>
+
+  <ion-list style="margin: 0; padding: 0;">
+    <div *ngFor="let name of names">
+      <ion-item *ngIf="name.playerId <= playerAmount">
+        <ion-label position="floating">Duelist {{name.playerId}} name</ion-label>
+        <ion-input (ionBlur)="setName($event, name.playerId)" type="text" [value]="name.name" placeholder="Name"></ion-input>
+      </ion-item>
+    </div>
+  </ion-list>
+
+</ion-content>
