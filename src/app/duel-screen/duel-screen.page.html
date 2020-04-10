@@ -9,18 +9,18 @@
         <div *ngIf="settings.playerAmount == 2">
             <ion-row>
                 <ion-col class="info">
-                    <ion-card button class="button topButtons">
-                        <ion-icon name="refresh-outline"></ion-icon>
+                    <ion-card button (click)="restartGame()" class="button topButtons">
+                        <ion-icon name="restart"></ion-icon>
+                    </ion-card>
+                </ion-col>
+                <ion-col class="info">
+                    <ion-card button (click)="rollDice()" class="button topButtons">
+                        <ion-icon name="dice"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
                     <ion-card button class="button topButtons">
-                        <ion-icon name="refresh-outline"></ion-icon>
-                    </ion-card>
-                </ion-col>
-                <ion-col class="info">
-                    <ion-card button class="button topButtons">
-                        <ion-icon name="refresh-outline"></ion-icon>
+                        <ion-icon name="coin"></ion-icon>
                     </ion-card>
                 </ion-col>
             </ion-row>
@@ -60,17 +60,17 @@
             <ion-row>
                 <ion-col class="info">
                     <ion-card button class="button bottomButtons">
-                        <ion-icon name="refresh-outline"></ion-icon>
+                        <ion-icon name="coin"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button class="button bottomButtons">
-                        <ion-icon name="refresh-outline"></ion-icon>
+                    <ion-card button (click)="rollDice()" class="button bottomButtons">
+                        <ion-icon name="dice"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button class="button bottomButtons">
-                        <ion-icon name="refresh-outline"></ion-icon>
+                    <ion-card button (click)="restartGame()"  class="button bottomButtons">
+                        <ion-icon name="restart"></ion-icon>
                     </ion-card>
                 </ion-col>
             </ion-row>

@@ -5,6 +5,7 @@ import {ModalController} from '@ionic/angular';
 import {NumpadComponent} from '../numpad/numpad.component';
 import {PlayerService} from '../player.service';
 import {NumpadUpsidedownComponent} from '../numpad-upsidedown/numpad-upsidedown.component';
+import { AlertController } from '@ionic/angular';
 
 @Component({
     selector: 'app-duel-screen',
@@ -18,7 +19,8 @@ export class DuelScreenPage implements OnInit {
     constructor(private settings: SettingsPage,
                 private screenOrientation: ScreenOrientation,
                 public modalCtrl: ModalController,
-                public playerService: PlayerService) {
+                public playerService: PlayerService,
+                public alertController: AlertController) {
         settings.getData();
         this.setupGame();
     }
@@ -59,6 +61,30 @@ export class DuelScreenPage implements OnInit {
                 }
             });
         return await modal.present();
+    }
+
+    async restartGame() {
+        const alert = await this.alertController.create({
+            header: 'Reset LP?',
+            buttons: [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                }, {
+                    text: 'Yes',
+                    handler: () => {
+                        for (let i = 0; i < this.settings.playerAmount; i++) {
+                            this.players[i].lifePoints = this.settings.lifePoints;
+                        }
+                    }
+                }
+            ]
+        });
+        await alert.present();
+    }
+
+    rollDice() {
+        console.log("TODO");
     }
 
     ionViewWillEnter() {
