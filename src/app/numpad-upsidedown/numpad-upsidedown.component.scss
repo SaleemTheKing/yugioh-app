@@ -1,7 +1,7 @@
 .key {
   text-align: center;
   border-radius: 25px;
-  transform: rotateZ(180deg);
+  transform: rotateX(180deg) scale(-1, 1);
 }
 
 .backspace {
@@ -9,12 +9,12 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  transform: rotateZ(180deg);
+  transform: rotateX(180deg) scale(1, -1);
 }
 
 .screen {
   border-radius: 25px;
-  transform: rotateZ(180deg);
+  transform: rotateX(180deg) scale(-1, 1);
 }
 
 .enterButton {
@@ -23,6 +23,6 @@
   text-align: center;
   margin-left: 30%;
   margin-right: 30%;
-  transform: rotateZ(180deg);
+  transform: rotateX(180deg) scale(-1, 1);
 }
 
