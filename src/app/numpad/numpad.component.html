@@ -1,0 +1,112 @@
+<ion-content>
+
+    <div>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-item class="screen">
+                        <ion-label>Life Points: {{player.lifePoints}} {{operationString}} {{digitString}}</ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(1)">
+                        <ion-label>1</ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(2)">
+                        <ion-label>2</ion-label>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(3)">
+                        <ion-label>3</ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(4)">
+                <ion-label>4</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(5)">
+                <ion-label>5</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(6)">
+                <ion-label>6</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(7)">
+                <ion-label>7</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(8)">
+                <ion-label>8</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!keyEnabled" (click)="key(9)">
+                <ion-label>9</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!zerosEnabled" (click)="key('0')">
+                <ion-label>0</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!zerosEnabled" (click)="key('00')">
+                <ion-label>00</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!zerosEnabled" (click)="key('000')">
+                <ion-label>000</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!operatorsEnabled" (click)="setOperator('+')">
+                <ion-label>+</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!operatorsEnabled" (click)="setOperator('-')">
+                <ion-label>-</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" button [disabled]="!operatorsEnabled" (click)="setOperator('/')">
+                <ion-label>/</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item class="key" (click)="deleteCharacter()">
+                <ion-icon class="backspace" name="backspace-outline"></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card class="enterButton" button (click)="calculate()">
+                <ion-label>Enter</ion-label>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+    </div>
+</ion-content>

@@ -1,0 +1,28 @@
+.key {
+  text-align: center;
+  border-radius: 25px;
+  transform: rotateZ(180deg);
+}
+
+.backspace {
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform: rotateZ(180deg);
+}
+
+.screen {
+  border-radius: 25px;
+  transform: rotateZ(180deg);
+}
+
+.enterButton {
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  transform: rotateZ(180deg);
+}
+
