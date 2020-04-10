@@ -27,10 +27,10 @@ export class SettingsPage {
   public teamsEnabled: boolean = false;
   public timeLimitEnabled: boolean = false;
   public names = [
-      {playerId: 1, name: 'Duelist 1', team: 1},
-      {playerId: 2, name: 'Duelist 2', team: 1},
-      {playerId: 3, name: 'Duelist 3', team: 2},
-      {playerId: 4, name: 'Duelist 4', team: 2}
+      {playerId: 1, name: 'Duelist 1', team: 1, lifePoints: 0},
+      {playerId: 2, name: 'Duelist 2', team: 1, lifePoints: 0},
+      {playerId: 3, name: 'Duelist 3', team: 2, lifePoints: 0},
+      {playerId: 4, name: 'Duelist 4', team: 2, lifePoints: 0}
   ];
 
   constructor(public storage: Storage) {

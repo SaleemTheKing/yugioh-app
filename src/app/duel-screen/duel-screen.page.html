@@ -1,16 +1,83 @@
 <ion-content fullscreen="true">
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <ion-card>
-        <h4>hello some text goes here</h4>
-      </ion-card>
-    </ion-col>
-    <ion-col>
-      <ion-card>
-        <h4>hello some text goes here</h4>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+    <script>
+
+    </script>
+
+
+    <ion-grid>
+
+        <div *ngIf="settings.playerAmount == 2">
+            <ion-row>
+                <ion-col class="info">
+                    <ion-card button class="button topButtons">
+                        <ion-icon name="refresh-outline"></ion-icon>
+                    </ion-card>
+                </ion-col>
+                <ion-col class="info">
+                    <ion-card button class="button topButtons">
+                        <ion-icon name="refresh-outline"></ion-icon>
+                    </ion-card>
+                </ion-col>
+                <ion-col class="info">
+                    <ion-card button class="button topButtons">
+                        <ion-icon name="refresh-outline"></ion-icon>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculatorUpsideDown(players[1])" class="card2player-2">
+                            <h4 class="info">{{players[1].name}}</h4>
+                            <h4 class="info">{{players[1].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="settings.timeLimitEnabled">
+                <ion-col>
+                    <h1 class="timer">14:14:14</h1>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="!settings.timeLimitEnabled">
+                <div style="margin: 30%"></div>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculator(players[0])" class="card2player-1">
+                            <h4 class="info">{{players[0].name}}</h4>
+                            <h4 class="info">{{players[0].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="info">
+                    <ion-card button class="button bottomButtons">
+                        <ion-icon name="refresh-outline"></ion-icon>
+                    </ion-card>
+                </ion-col>
+                <ion-col class="info">
+                    <ion-card button class="button bottomButtons">
+                        <ion-icon name="refresh-outline"></ion-icon>
+                    </ion-card>
+                </ion-col>
+                <ion-col class="info">
+                    <ion-card button class="button bottomButtons">
+                        <ion-icon name="refresh-outline"></ion-icon>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+
+
+        </div>
+
+
+    </ion-grid>
 </ion-content>
