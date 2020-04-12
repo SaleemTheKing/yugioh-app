@@ -1,26 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SettingsPage} from '../settings/settings.page';
-import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
-import {ModalController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 import {NumpadComponent} from '../numpad/numpad.component';
 import {PlayerService} from '../player.service';
 import {NumpadUpsidedownComponent} from '../numpad-upsidedown/numpad-upsidedown.component';
-import { AlertController } from '@ionic/angular';
+import {CountdownComponent} from 'ngx-countdown';
 
 @Component({
     selector: 'app-duel-screen',
-    templateUrl: './duel-screen.page.html',
     styleUrls: ['./duel-screen.page.scss'],
+    templateUrl: './duel-screen.page.html',
 })
+
+
 export class DuelScreenPage implements OnInit {
 
+
     players: any;
+    seconds: number = 0;
+    @ViewChild('timer', {static: false}) private countdown: CountdownComponent;
 
     constructor(private settings: SettingsPage,
-                private screenOrientation: ScreenOrientation,
                 public modalCtrl: ModalController,
                 public playerService: PlayerService,
-                public alertController: AlertController) {
+                public alertController: AlertController,) {
         settings.getData();
         this.setupGame();
     }
@@ -30,7 +33,24 @@ export class DuelScreenPage implements OnInit {
         for (let i = 0; i < this.settings.playerAmount; i++) {
             this.players[i].lifePoints = this.settings.lifePoints;
         }
+        if (this.settings.timeLimitEnabled) {
+            this.setTimer();
+        }
+    }
 
+    setTimer() {
+        this.seconds = this.settings.timeLimit * 60;
+    }
+
+    resetTimer() {
+        this.countdown.restart();
+        document.getElementById('timer').classList.remove('timer--expired');
+    }
+
+    alert(ev: any) {
+        if (ev.action == 'done') {
+            document.getElementById('timer').classList.add('timer--expired');
+        }
     }
 
     async openCalculator(player) {
@@ -73,9 +93,8 @@ export class DuelScreenPage implements OnInit {
                 }, {
                     text: 'Yes',
                     handler: () => {
-                        for (let i = 0; i < this.settings.playerAmount; i++) {
-                            this.players[i].lifePoints = this.settings.lifePoints;
-                        }
+                        this.setupGame();
+                        this.resetTimer();
                     }
                 }
             ]
@@ -83,20 +102,45 @@ export class DuelScreenPage implements OnInit {
         await alert.present();
     }
 
-    rollDice() {
-        console.log("TODO");
+    async rollDice(duelistName: string) {
+        let roll = 1 + Math.floor(Math.random() * 6);
+
+        const alert = await this.alertController.create({
+            header: duelistName + ' rolled: ' + roll,
+            buttons: [
+                {
+                    text: 'Ok',
+                    role: 'cancel'
+                }
+            ],
+        });
+        await alert.present();
+    }
+
+    async coinFlip(duelistName: string) {
+        let coin = Math.round(Math.random());
+        let result;
+        if (coin == 1) {
+            result = 'Tails';
+        } else {
+            result = 'Heads';
+        }
+
+        const alert = await this.alertController.create({
+            header: duelistName + ' tossed: ' + result,
+            buttons: [
+                {
+                    text: 'Ok',
+                    role: 'cancel'
+                }
+            ],
+        });
+        await alert.present();
     }
 
     ionViewWillEnter() {
         this.settings.getData();
         this.setupGame();
-        if (this.settings.playerAmount > 2) {
-            this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
-        }
-    }
-
-    ionViewWillLeave() {
-        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     }
 
     ngOnInit() {

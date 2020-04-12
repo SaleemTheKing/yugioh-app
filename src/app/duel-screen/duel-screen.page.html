@@ -1,12 +1,6 @@
 <ion-content fullscreen="true">
-    <script>
-
-    </script>
-
-
     <ion-grid>
-
-        <div *ngIf="settings.playerAmount == 2">
+        <div>
             <ion-row>
                 <ion-col class="info">
                     <ion-card button (click)="restartGame()" class="button topButtons">
@@ -14,19 +8,30 @@
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button (click)="rollDice()" class="button topButtons">
+                    <ion-card button (click)="rollDice(players[1].name)" class="button topButtons">
                         <ion-icon name="dice"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button class="button topButtons">
+                    <ion-card button (click)="coinFlip(players[1].name)" class="button topButtons">
                         <ion-icon name="coin"></ion-icon>
                     </ion-card>
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row *ngIf="settings.playerAmount == 1">
                 <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculatorUpsideDown(players[0])" class="card2player-2">
+                            <h4 class="info">{{players[0].name}}</h4>
+                            <h4 class="info">{{players[0].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col *ngIf="settings.playerAmount > 1">
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculatorUpsideDown(players[1])" class="card2player-2">
                             <h4 class="info">{{players[1].name}}</h4>
@@ -34,12 +39,19 @@
                         </ion-card>
                     </div>
                 </ion-col>
+                <ion-col *ngIf="settings.playerAmount > 3">
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculatorUpsideDown(players[3])" class="card2player-2">
+                            <h4 class="info">{{players[3].name}}</h4>
+                            <h4 class="info">{{players[3].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
             </ion-row>
 
             <ion-row *ngIf="settings.timeLimitEnabled">
-                <ion-col>
-                    <h1 class="timer">14:14:14</h1>
-                </ion-col>
+                <countdown #timer id="timer" class="timer" (event)="alert($event)"
+                           [config]="{leftTime: seconds}"></countdown>
             </ion-row>
 
             <ion-row *ngIf="!settings.timeLimitEnabled">
@@ -55,29 +67,33 @@
                         </ion-card>
                     </div>
                 </ion-col>
+                <ion-col *ngIf="settings.playerAmount > 2">
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculator(players[2])" class="card2player-1">
+                            <h4 class="info">{{players[2].name}}</h4>
+                            <h4 class="info">{{players[2].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
             </ion-row>
 
             <ion-row>
                 <ion-col class="info">
-                    <ion-card button class="button bottomButtons">
+                    <ion-card button (click)="coinFlip(players[0].name)" class="button bottomButtons">
                         <ion-icon name="coin"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button (click)="rollDice()" class="button bottomButtons">
+                    <ion-card button (click)="rollDice(players[0].name)" class="button bottomButtons">
                         <ion-icon name="dice"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button (click)="restartGame()"  class="button bottomButtons">
+                    <ion-card button (click)="restartGame()" class="button bottomButtons">
                         <ion-icon name="restart"></ion-icon>
                     </ion-card>
                 </ion-col>
             </ion-row>
-
-
         </div>
-
-
     </ion-grid>
 </ion-content>

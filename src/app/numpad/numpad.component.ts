@@ -63,6 +63,9 @@ export class NumpadComponent implements OnInit {
         } else if (this.operationString == '/') {
             duelist.lifePoints = Math.round((duelist.lifePoints / digits));
         }
+        if(duelist.lifePoints < 0) {
+            duelist.lifePoints = 0;
+        }
         this.duelScreenPage.players[this.player.playerId - 1].lifePoints = duelist.lifePoints;
         this.modalCtrl.dismiss(duelist);
     }

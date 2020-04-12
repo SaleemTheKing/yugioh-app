@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ChangeDetectorRef, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
@@ -14,20 +14,22 @@ import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 import {NumpadComponent} from './numpad/numpad.component';
 import {DuelScreenPage} from './duel-screen/duel-screen.page';
 import {NumpadUpsidedownComponent} from './numpad-upsidedown/numpad-upsidedown.component';
+import {CountdownComponent, CountdownModule} from 'ngx-countdown';
 
 @NgModule({
     declarations: [AppComponent, NumpadComponent, NumpadUpsidedownComponent],
     entryComponents: [NumpadComponent, NumpadUpsidedownComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), CountdownModule],
     providers: [
         StatusBar,
         SplashScreen,
         ScreenOrientation,
         SettingsPage,
+        CountdownComponent,
         DuelScreenPage,
         NumpadComponent,
         NumpadUpsidedownComponent,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+        {provide: RouteReuseStrategy,  useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {IonReorderGroup} from '@ionic/angular';
+import {Time} from '@angular/common';
 
 @Component({
   selector: 'app-settings',
@@ -22,7 +23,7 @@ export class SettingsPage {
 
   // Default values for first boot
   public playerAmount: number = 2;
-  public lifePoints = 8000;
+  public lifePoints: number = 8000;
   public timeLimit: number = 30;
   public teamsEnabled: boolean = false;
   public timeLimitEnabled: boolean = false;
@@ -100,7 +101,7 @@ export class SettingsPage {
   }
 
   setTimeLimit(event: any) {
-    let time = event.target.value;
+    let time = +event.target.value;
     if (time < 5) {
       this.timeLimit = 5;
     } else {
