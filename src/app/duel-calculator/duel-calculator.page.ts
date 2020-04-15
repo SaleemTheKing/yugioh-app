@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class DuelCalculatorPage {
 
-  constructor(private settings: SettingsPage,
+  constructor(public settings: SettingsPage,
               public router: Router,) {
     settings.getData();
   }

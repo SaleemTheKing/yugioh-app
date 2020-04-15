@@ -23,7 +23,7 @@
                 <ion-col>
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculatorUpsideDown(players[0])" class="card2player-2">
-                            <h4 class="info">{{players[0].name}}</h4>
+                            <h4 class="nameText">{{players[0].name}}</h4>
                             <h4 class="info">{{players[0].lifePoints}}</h4>
                         </ion-card>
                     </div>
@@ -34,7 +34,7 @@
                 <ion-col *ngIf="settings.playerAmount > 1">
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculatorUpsideDown(players[1])" class="card2player-2">
-                            <h4 class="info">{{players[1].name}}</h4>
+                            <h4 class="nameText">{{players[1].name}}</h4>
                             <h4 class="info">{{players[1].lifePoints}}</h4>
                         </ion-card>
                     </div>
@@ -42,7 +42,7 @@
                 <ion-col *ngIf="settings.playerAmount > 3">
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculatorUpsideDown(players[3])" class="card2player-2">
-                            <h4 class="info">{{players[3].name}}</h4>
+                            <h4 class="nameText">{{players[3].name}}</h4>
                             <h4 class="info">{{players[3].lifePoints}}</h4>
                         </ion-card>
                     </div>
@@ -62,7 +62,7 @@
                 <ion-col>
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculator(players[0])" class="card2player-1">
-                            <h4 class="info">{{players[0].name}}</h4>
+                            <h4 class="nameText">{{players[0].name}}</h4>
                             <h4 class="info">{{players[0].lifePoints}}</h4>
                         </ion-card>
                     </div>
@@ -70,7 +70,7 @@
                 <ion-col *ngIf="settings.playerAmount > 2">
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculator(players[2])" class="card2player-1">
-                            <h4 class="info">{{players[2].name}}</h4>
+                            <h4 class="nameText">{{players[2].name}}</h4>
                             <h4 class="info">{{players[2].lifePoints}}</h4>
                         </ion-card>
                     </div>

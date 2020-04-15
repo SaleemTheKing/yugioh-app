@@ -1,75 +1,71 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Duel
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Duel
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Duel</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Duel</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
 
-  <div>
+    <div>
+        <div class="centerText">
+            <ion-grid>
+                <ion-row>
+                    <ion-col></ion-col>
 
-    <div class="centerText">
-      <ion-grid>
+                    <ion-col>
+                        <ion-card class="nameCard">
+                            <ion-label class="nameText">{{settings.names[1].name}}</ion-label>
+                        </ion-card>
+                    </ion-col>
 
-        <ion-row *ngIf="settings.playerAmount == 1">
-          <div class="centerText">
-            <h3 >{{settings.names[0].name}}</h3>
-          </div>
-        </ion-row>
+                    <ion-col></ion-col>
+                </ion-row>
 
-        <ion-row *ngIf="settings.playerAmount == 2 || settings.playerAmount == 3 || settings.playerAmount == 4">
-          <ion-col><h3 class="nameText">{{settings.names[0].name}}</h3></ion-col>
-          <ion-col><h3 class="vsText">VS</h3></ion-col>
-          <ion-col><h3 class="nameText">{{settings.names[1].name}}</h3></ion-col>
-        </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-card class="nameCard" *ngIf="settings.playerAmount > 2">
+                            <ion-text class="nameText">{{settings.names[2].name}}</ion-text>
+                        </ion-card>
+                    </ion-col>
 
+                    <ion-col><h3 class="vsText">VS</h3></ion-col>
 
-        <ion-row *ngIf="settings.playerAmount == 3">
-          <ion-col><h3 class="vsText">VS</h3></ion-col>
-          <ion-col><h3 class="vsText">VS</h3></ion-col>
-        </ion-row>
+                    <ion-col>
+                        <ion-card class="nameCard" *ngIf="settings.playerAmount > 3">
+                            <ion-text class="nameText">{{settings.names[3].name}}</ion-text>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
 
-        <ion-row *ngIf="settings.playerAmount == 3">
-          <ion-col></ion-col>
-          <ion-col><h3 class="nameText">{{settings.names[2].name}}</h3> </ion-col>
-          <ion-col></ion-col>
-        </ion-row>
+                <ion-row>
+                    <ion-col></ion-col>
 
+                    <ion-col>
+                        <ion-card class="nameCard" *ngIf="settings.playerAmount > 1">
+                            <ion-text class="nameText">{{settings.names[0].name}}</ion-text>
+                        </ion-card>
+                    </ion-col>
 
-        <ion-row *ngIf="settings.playerAmount == 4">
-          <ion-col><h3 class="vsText">VS</h3></ion-col>
-          <ion-col></ion-col>
-          <ion-col><h3 class="vsText">VS</h3></ion-col>
-        </ion-row>
+                    <ion-col></ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
 
-
-        <ion-row *ngIf="settings.playerAmount == 4">
-          <ion-col><h3 class="nameText">{{settings.names[2].name}}</h3></ion-col>
-          <ion-col><h3 class="vsText">VS</h3></ion-col>
-          <ion-col><h3 class="nameText">{{settings.names[3].name}}</h3></ion-col>
-        </ion-row>
-
-      </ion-grid>
+        <div class="infoAndButton">
+            <h3>Life Points: {{settings.lifePoints}}</h3>
+            <h3 *ngIf="settings.timeLimitEnabled">Time Limit: {{settings.timeLimit}} minutes</h3>
+            <h3 *ngIf="!settings.timeLimitEnabled">No Time Limit</h3>
+            <ion-button [routerLink]="['/duel-screen']">
+                <ion-label>Start Duel</ion-label>
+            </ion-button>
+        </div>
     </div>
-
-    <div class="infoAndButton">
-      <h3>Life Points: {{settings.lifePoints}}</h3>
-      <h3>Time Limit: {{settings.timeLimit}} minutes</h3>
-      <ion-button [routerLink]="['/duel-screen']">
-        <ion-label>Start Duel</ion-label>
-      </ion-button>
-    </div>
-  </div>
-
-
-
-
 </ion-content>

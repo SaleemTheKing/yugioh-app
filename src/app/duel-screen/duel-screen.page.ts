@@ -20,7 +20,7 @@ export class DuelScreenPage implements OnInit {
     seconds: number = 0;
     @ViewChild('timer', {static: false}) private countdown: CountdownComponent;
 
-    constructor(private settings: SettingsPage,
+    constructor(public settings: SettingsPage,
                 public modalCtrl: ModalController,
                 public playerService: PlayerService,
                 public alertController: AlertController,) {
