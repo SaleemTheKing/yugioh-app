@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {String} from 'typescript-string-operations';
-import {LoadingController} from '@ionic/angular';
 import {CardslistService} from '../cardslist.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-card-search',
@@ -68,6 +68,28 @@ export class CardSearchPage {
         {type: 'Cyberse'},
     ];
 
+    level = [
+        {level: '1'},
+        {level: '2'},
+        {level: '3'},
+        {level: '4'},
+        {level: '5'},
+        {level: '6'},
+        {level: '7'},
+        {level: '8'},
+        {level: '9'},
+        {level: '10'},
+        {level: '11'},
+        {level: '12'},
+    ];
+
+    levelRange = [
+        {range: 'Equals', query: ''},
+        {range: 'Greater Than', query: 'gte'},
+        {range: 'Less Than', query: 'lte'},
+    ];
+
+
     spellType = [
         {type: 'All'},
         {type: 'Normal'},
@@ -104,10 +126,13 @@ export class CardSearchPage {
     selectedMonsterFrame;
     selectedMonsterType;
     selectedMonsterAtt;
+    selectedLevel;
+    selectedLevelRange;
 
     constructor(public http: HttpClient,
-                public loadingCtrl: LoadingController,
-                public cardsList: CardslistService) {
+                public cardsList: CardslistService,
+                public router: Router,
+    ) {
     }
 
 
@@ -130,6 +155,16 @@ export class CardSearchPage {
         this.selectedMonsterFrame = ev.target.value;
     }
 
+    setRank(ev: any) {
+        console.log(ev.target.value);
+        this.selectedLevel = ev.target.value;
+    }
+
+    setRankRange(ev: any) {
+        console.log(ev.target.value);
+        this.selectedLevelRange = ev.target.value;
+    }
+
     setSpellType(ev: any) {
         this.selectedSpellType = ev.target.value;
     }
@@ -140,31 +175,6 @@ export class CardSearchPage {
 
     setQuery(ev: any) {
         this.selectedQuery = ev.target.value.toLowerCase();
-    }
-
-
-    async searchByName(name: any) {
-        let loading = await this.loadingCtrl.create({
-            spinner: 'bubbles',
-            message: 'Getting cards...'
-        });
-        await loading.present();
-
-        let query = name.target.value.toLowerCase();
-        if (query != this.previousQuery.toLowerCase() && query != '') {
-            this.previousQuery = query;
-            this.listOfCards = [];
-            this.http.get(String.Format('https://db.ygoprodeck.com/api/v6/cardinfo.php?&fname={0}', query))
-                .subscribe(response => {
-                    for (let i = 0; i < 100; i++) {
-                        this.listOfCards.push(response[i]);
-                    }
-                });
-            await loading.dismiss();
-        } else {
-            await loading.dismiss();
-            return;
-        }
     }
 
     search() {
@@ -195,30 +205,32 @@ export class CardSearchPage {
                 if (this.selectedMonsterType != null) {
                     queries = queries.concat(String.Format('&race={0}', this.selectedMonsterType));
                 }
-            }
 
-            if (this.selectedCategory == 'Spell Card') {
+                if (this.selectedLevel != null && this.selectedLevelRange != null) {
+                    if (this.selectedLevelRange != '') {
+                        queries = queries.concat(String.Format('&level={0}{1}', this.selectedLevelRange, this.selectedLevel));
+                    } else {
+                        queries = queries.concat(String.Format('&level={0}', this.selectedLevel));
+                    }
+                }
+            } else if (this.selectedCategory == 'Spell Card') {
                 queries = queries.concat(String.Format('&type={0}', this.selectedCategory));
                 if (this.selectedSpellType != null) {
                     queries = queries.concat(String.Format('&race={0}', this.selectedSpellType));
                 }
-            }
-
-            if (this.selectedCategory == 'Trap Card') {
+            } else if (this.selectedCategory == 'Trap Card') {
                 queries = queries.concat(String.Format('&type={0}', this.selectedCategory));
                 if (this.selectedTrapType != null) {
                     queries = queries.concat(String.Format('&race={0}', this.selectedTrapType));
                 }
             }
-
-
-            url = url.concat(queries);
-            url = url.replace(/&/i, '?');
-            url = url.replace(/ /g, '%20');
-
+            url = url.concat(queries).replace(/&/i, '?').replace(/ /g, '%20').toLowerCase();
+            console.log(url);
         }
-        console.log(url.toLowerCase());
+
+        this.http.get(url).subscribe(data => {
+            this.cardsList.cardsList = data;
+            this.router.navigate(['/search-results']);
+        });
     }
-
-
 }

@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'duel-screen',
     loadChildren: () => import('./duel-screen/duel-screen.module').then( m => m.DuelScreenPageModule)
+  },  {
+    path: 'search-results',
+    loadChildren: () => import('./search-results/search-results.module').then( m => m.SearchResultsPageModule)
   }
+
 ];
 @NgModule({
   imports: [

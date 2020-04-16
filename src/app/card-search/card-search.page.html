@@ -35,6 +35,25 @@
         <ion-select (ionChange)="setMonsterAtt($event)" placeholder="Attribute" [value]="monsterAttribute">
             <ion-select-option value="{{att.attribute}}" *ngFor="let att of monsterAttribute">{{att.attribute}}</ion-select-option>
         </ion-select>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <ion-select (ionChange)="setRankRange($event)" placeholder="Range">
+                        <ion-select-option [value]="range.query"
+                                           *ngFor="let range of levelRange">{{range.range}}</ion-select-option>
+                    </ion-select>
+                </ion-col>
+                <ion-col>
+                    <ion-select (ionChange)="setRank($event)" placeholder="Level/Rank">
+                        <ion-select-option [value]="rank.level"
+                                           *ngFor="let rank of level">{{rank.level}}</ion-select-option>
+                    </ion-select>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
     </div>
 
 
@@ -54,7 +73,7 @@
     </ion-select>
 
     <div>
-        <ion-card button (click)="search()">Search Cards</ion-card>
+        <ion-card class="button" button (click)="search()">Search Cards</ion-card>
     </div>
 
 

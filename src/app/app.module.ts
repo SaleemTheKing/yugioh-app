@@ -16,10 +16,11 @@ import {DuelScreenPage} from './duel-screen/duel-screen.page';
 import {NumpadUpsidedownComponent} from './numpad-upsidedown/numpad-upsidedown.component';
 import {CountdownComponent, CountdownModule} from 'ngx-countdown';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {CardDetailsComponent} from './components/card-details/card-details.component';
 
 @NgModule({
-    declarations: [AppComponent, NumpadComponent, NumpadUpsidedownComponent],
-    entryComponents: [NumpadComponent, NumpadUpsidedownComponent],
+    declarations: [AppComponent, NumpadComponent, NumpadUpsidedownComponent, CardDetailsComponent],
+    entryComponents: [NumpadComponent, NumpadUpsidedownComponent, CardDetailsComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
