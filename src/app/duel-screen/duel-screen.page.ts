@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SettingsPage} from '../settings/settings.page';
 import {AlertController, ModalController} from '@ionic/angular';
-import {NumpadComponent} from '../numpad/numpad.component';
-import {PlayerService} from '../player.service';
-import {NumpadUpsidedownComponent} from '../numpad-upsidedown/numpad-upsidedown.component';
+import {NumpadComponent} from '../components/numpad/numpad.component';
+import {PlayerService} from '../services/player/player.service';
+import {NumpadUpsidedownComponent} from '../components/numpad-upsidedown/numpad-upsidedown.component';
 import {CountdownComponent} from 'ngx-countdown';
 
 @Component({

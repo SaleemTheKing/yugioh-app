@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {PlayerService} from '../player.service';
-import {DuelScreenPage} from '../duel-screen/duel-screen.page';
+import {PlayerService} from '../../services/player/player.service';
+import {DuelScreenPage} from '../../duel-screen/duel-screen.page';
 
 
 @Component({

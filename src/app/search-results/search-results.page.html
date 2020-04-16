@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Cards</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="list.length != 0">
+        <ion-list id="list">
+            <ion-item *ngFor="let card of list" button (click)="openCard(card)">{{card.name}}</ion-item>
+        </ion-list>
+    </div>
+</ion-content>

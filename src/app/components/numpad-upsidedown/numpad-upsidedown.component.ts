@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PlayerService} from '../player.service';
+import {PlayerService} from '../../services/player/player.service';
 import {ModalController} from '@ionic/angular';
-import {DuelScreenPage} from '../duel-screen/duel-screen.page';
+import {DuelScreenPage} from '../../duel-screen/duel-screen.page';
 
 @Component({
   selector: 'app-numpad-upsidedown',

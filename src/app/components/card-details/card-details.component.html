@@ -1,0 +1,104 @@
+<ion-header class="centerText">
+    <ion-toolbar>
+        <ion-label>{{card.name}}</ion-label>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+                <ion-img src="https://storage.googleapis.com/ygoprodeck.com/pics/{{card.id}}.jpg"></ion-img>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+
+        <div *ngIf="card.type.includes('Monster')">
+            <ion-row>
+                <ion-col class="centerText">
+                    {{card.type.replace("Monster", "")}} | {{card.race}} | {{card.attribute}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="centerText">
+                    Atk: {{card.atk}} | Def: {{card.def}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="centerText">
+                    Lvl: {{card.level}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="card.archetype != null">
+                <ion-col class="centerText">
+                    Archetype: {{card.archetype}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="centerText">
+                    {{card.desc}}
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <div *ngIf="card.type == 'Spell Card'">
+            <ion-row>
+                <ion-col class="centerText">
+                    {{card.type}} | {{card.race}} Spell
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="card.archetype != null">
+                <ion-col class="centerText">
+                    Archetype: {{card.archetype}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="centerText">
+                    {{card.desc}}
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <div *ngIf="card.type == 'Trap Card'">
+            <ion-row>
+                <ion-col class="centerText">
+                    {{card.type}} | {{card.race}} Trap
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="card.archetype != null">
+                <ion-col class="centerText">
+                    Archetype: {{card.archetype}}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col class="centerText">
+                    {{card.desc}}
+                </ion-col>
+            </ion-row>
+        </div>
+
+        <div *ngIf="card.banlist_info != null">
+            <ion-row>
+                <ion-col class="centerText">
+                    TCG Status: {{card.banlist_info.ban_tcg}}
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="centerText">
+                    OCG Status: {{card.banlist_info.ban_ocg}}
+                </ion-col>
+            </ion-row>
+        </div>
+
+    </ion-grid>
+</ion-content>

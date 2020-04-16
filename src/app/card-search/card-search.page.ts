@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {String} from 'typescript-string-operations';
-import {CardslistService} from '../cardslist.service';
+import {CardslistService} from '../services/cardslist/cardslist.service';
 import {Router} from '@angular/router';
 
 @Component({
