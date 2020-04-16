@@ -15,11 +15,20 @@ import {NumpadComponent} from './numpad/numpad.component';
 import {DuelScreenPage} from './duel-screen/duel-screen.page';
 import {NumpadUpsidedownComponent} from './numpad-upsidedown/numpad-upsidedown.component';
 import {CountdownComponent, CountdownModule} from 'ngx-countdown';
+import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent, NumpadComponent, NumpadUpsidedownComponent],
     entryComponents: [NumpadComponent, NumpadUpsidedownComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), CountdownModule],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        IonicStorageModule.forRoot(),
+        CountdownModule,
+        BrowserModule,
+        HttpClientModule
+    ],
     providers: [
         StatusBar,
         SplashScreen,
@@ -29,6 +38,7 @@ import {CountdownComponent, CountdownModule} from 'ngx-countdown';
         DuelScreenPage,
         NumpadComponent,
         NumpadUpsidedownComponent,
+        HttpClient,
         {provide: RouteReuseStrategy,  useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

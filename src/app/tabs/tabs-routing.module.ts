@@ -18,12 +18,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'card-search',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../TODO/tab2.module').then(m => m.Tab2PageModule)
+              import('../card-search/card-search.module').then(m => m.Tab2PageModule)
           }
         ]
       },

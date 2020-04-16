@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Card Search
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Card Search</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-searchbar (ionBlur)="setQuery($event)"></ion-searchbar>
+
+    <ion-select (ionChange)="setCategory($event)" placeholder="Category">
+        <ion-select-option [value]="category.query"
+                           *ngFor="let category of cardCategory">{{category.category}}</ion-select-option>
+    </ion-select>
+
+
+    <!--MONSTERS-->
+
+    <div *ngIf="selectedCategory == 'Monster'">
+        <ion-select (ionChange)="setMonsterFrame($event)" placeholder="Card Frame" [value]="selectedMonsterFrame">
+            <ion-select-option value="{{frame.query}}" *ngFor="let frame of monsterFrame">{{frame.frame}}</ion-select-option>
+        </ion-select>
+
+        <ion-select (ionChange)="setMonsterType($event)" placeholder="Type">
+            <ion-select-option value="{{type.type}}" *ngFor="let type of monsterType">{{type.type}}</ion-select-option>
+        </ion-select>
+
+        <ion-select (ionChange)="setMonsterAtt($event)" placeholder="Attribute" [value]="monsterAttribute">
+            <ion-select-option value="{{att.attribute}}" *ngFor="let att of monsterAttribute">{{att.attribute}}</ion-select-option>
+        </ion-select>
+    </div>
+
+
+    <!--SPELLS-->
+
+    <ion-select (ionChange)="setSpellType($event)" *ngIf="selectedCategory == 'Spell Card'" placeholder="Type"
+                [value]="spellType[0].type">
+        <ion-select-option *ngFor="let type of spellType">{{type.type}}</ion-select-option>
+    </ion-select>
+
+
+    <!--TRAPS-->
+
+    <ion-select (ionChange)="setTrapType($event)" *ngIf="selectedCategory == 'Trap Card'" placeholder="Type"
+                [value]="trapType[0].type">
+        <ion-select-option *ngFor="let type of trapType">{{type.type}}</ion-select-option>
+    </ion-select>
+
+    <div>
+        <ion-card button (click)="search()">Search Cards</ion-card>
+    </div>
+
+
+</ion-content>
