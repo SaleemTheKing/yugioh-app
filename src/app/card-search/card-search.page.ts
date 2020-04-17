@@ -137,12 +137,10 @@ export class CardSearchPage {
 
 
     setCategory(ev: any) {
-        console.log(ev.target.value);
         this.selectedCategory = ev.target.value;
     }
 
     setMonsterType(ev: any) {
-        console.log(ev.target.value);
         this.selectedMonsterType = ev.target.value;
     }
 
@@ -151,17 +149,14 @@ export class CardSearchPage {
     }
 
     setMonsterFrame(ev: any) {
-        console.log(ev.target.value);
         this.selectedMonsterFrame = ev.target.value;
     }
 
     setRank(ev: any) {
-        console.log(ev.target.value);
         this.selectedLevel = ev.target.value;
     }
 
     setRankRange(ev: any) {
-        console.log(ev.target.value);
         this.selectedLevelRange = ev.target.value;
     }
 
@@ -225,7 +220,6 @@ export class CardSearchPage {
                 }
             }
             url = url.concat(queries).replace(/&/i, '?').replace(/ /g, '%20').toLowerCase();
-            console.log(url);
         }
 
         this.http.get(url).subscribe(data => {

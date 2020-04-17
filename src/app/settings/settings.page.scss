@@ -1,3 +1,24 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.input-wrapper {
+  justify-content: space-between;
+  display: flex;
+  position: relative;
+}
+
+
+.sorter {
+  animation: slideIn 0.1s;
+  animation-fill-mode: forwards;
+
+  @keyframes slideIn {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 5%;
+    }
+  }
+}

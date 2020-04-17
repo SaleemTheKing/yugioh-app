@@ -8,12 +8,12 @@
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button (click)="rollDice(players[1].name)" class="button topButtons">
+                    <ion-card button (click)="rollDice()" class="button topButtons">
                         <ion-icon name="dice"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button (click)="coinFlip(players[1].name)" class="button topButtons">
+                    <ion-card button (click)="coinFlip()" class="button topButtons">
                         <ion-icon name="coin"></ion-icon>
                     </ion-card>
                 </ion-col>
@@ -30,7 +30,7 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row *ngIf="!settings.teamsEnabled">
                 <ion-col *ngIf="settings.playerAmount > 1">
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculatorUpsideDown(players[1])" class="card2player-2">
@@ -49,16 +49,55 @@
                 </ion-col>
             </ion-row>
 
+            <ion-row *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
+                <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculatorUpsideDown(players[2])" class="card2player-2 team2">
+                            <h4 class="nameText">{{players[2].name}}</h4>
+                            <h4 class="info">{{players[2].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculatorUpsideDown(players[3])" class="card2player-2 team2">
+                            <h4 class="nameText">{{players[3].name}}</h4>
+                            <h4 class="info">{{players[3].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
+                <ion-col class="centerText ">
+                    <h3 class="topButtons teamText">Team 2</h3>
+                </ion-col>
+            </ion-row>
+
             <ion-row *ngIf="settings.timeLimitEnabled">
                 <countdown #timer id="timer" class="timer" (event)="alert($event)"
                            [config]="{leftTime: seconds}"></countdown>
             </ion-row>
 
-            <ion-row *ngIf="!settings.timeLimitEnabled">
-                <div style="margin: 30%"></div>
+            <ion-row *ngIf="!settings.timeLimitEnabled && settings.teamsEnabled">
+                <ion-col>
+                    <div style="margin: 30%"></div>
+                </ion-col>
             </ion-row>
 
-            <ion-row>
+            <ion-row *ngIf="!settings.timeLimitEnabled && !settings.teamsEnabled">
+                <ion-col>
+                    <div style="margin: 70%"></div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="!settings.timeLimitEnabled && settings.teamsEnabled">
+                <ion-col>
+                    <div style="margin: 20%"></div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="!settings.teamsEnabled">
                 <ion-col>
                     <div class="divCenterContent">
                         <ion-card button (click)="openCalculator(players[0])" class="card2player-1">
@@ -77,14 +116,39 @@
                 </ion-col>
             </ion-row>
 
+            <ion-row *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
+                <ion-col class="centerText">
+                    <h3 class="teamText">Team 1</h3>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
+                <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculator(players[0])" class="card2player-1 team1">
+                            <h4 class="nameText">{{players[0].name}}</h4>
+                            <h4 class="info">{{players[0].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <div class="divCenterContent">
+                        <ion-card button (click)="openCalculator(players[1])" class="card2player-1 team1">
+                            <h4 class="nameText">{{players[1].name}}</h4>
+                            <h4 class="info">{{players[1].lifePoints}}</h4>
+                        </ion-card>
+                    </div>
+                </ion-col>
+            </ion-row>
+
             <ion-row>
                 <ion-col class="info">
-                    <ion-card button (click)="coinFlip(players[0].name)" class="button bottomButtons">
+                    <ion-card button (click)="coinFlip()" class="button bottomButtons">
                         <ion-icon name="coin"></ion-icon>
                     </ion-card>
                 </ion-col>
                 <ion-col class="info">
-                    <ion-card button (click)="rollDice(players[0].name)" class="button bottomButtons">
+                    <ion-card button (click)="rollDice()" class="button bottomButtons">
                         <ion-icon name="dice"></ion-icon>
                     </ion-card>
                 </ion-col>

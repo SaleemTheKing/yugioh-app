@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
@@ -15,7 +15,7 @@ import {NumpadComponent} from './components/numpad/numpad.component';
 import {DuelScreenPage} from './duel-screen/duel-screen.page';
 import {NumpadUpsidedownComponent} from './components/numpad-upsidedown/numpad-upsidedown.component';
 import {CountdownComponent, CountdownModule} from 'ngx-countdown';
-import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {CardDetailsComponent} from './components/card-details/card-details.component';
 
 @NgModule({
@@ -40,7 +40,7 @@ import {CardDetailsComponent} from './components/card-details/card-details.compo
         NumpadComponent,
         NumpadUpsidedownComponent,
         HttpClient,
-        {provide: RouteReuseStrategy,  useClass: IonicRouteStrategy}
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]
 })

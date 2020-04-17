@@ -16,10 +16,15 @@ export class DuelCalculatorPage {
 
   ionViewWillEnter(){
     this.settings.getData();
+    this.test();
   }
 
   goDuel() {
     this.router.navigate(['./duel-screen']);
+  }
+
+  test() {
+    console.log("Dark MODE:", window.matchMedia('(prefers-color-scheme: no-preference)').matches);
   }
 
 

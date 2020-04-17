@@ -26,11 +26,6 @@ export class SearchResultsPage implements OnInit {
         await loading.present();
     }
 
-    ionViewDidEnter() {
-        //this.load().then(spinner => spinner.dismiss());
-        console.log(this.list);
-    }
-
     ngOnInit() {
     }
 

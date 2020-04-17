@@ -18,12 +18,13 @@ export class DuelScreenPage implements OnInit {
 
     players: any;
     seconds: number = 0;
+    false;
     @ViewChild('timer', {static: false}) private countdown: CountdownComponent;
 
     constructor(public settings: SettingsPage,
                 public modalCtrl: ModalController,
                 public playerService: PlayerService,
-                public alertController: AlertController,) {
+                public alertController: AlertController) {
         settings.getData();
         this.setupGame();
     }
@@ -62,7 +63,13 @@ export class DuelScreenPage implements OnInit {
         modal.onDidDismiss()
             .then((data) => {
                 if (data.data != null) {
-                    this.players[player.playerId - 1] = data.data;
+                    // this.players[player.playerId - 1] = data.data;
+                    for (let i = 0; i < this.players.length; i++) {
+                        if (this.players[i].playerId == data.data.playerId) {
+                            this.players[i] = data.data;
+                            break;
+                        }
+                    }
                 }
             });
         return await modal.present();
@@ -77,7 +84,12 @@ export class DuelScreenPage implements OnInit {
         modal.onDidDismiss()
             .then((data) => {
                 if (data.data != null) {
-                    this.players[player.playerId - 1] = data.data;
+                    for (let i = 0; i < this.players.length; i++) {
+                        if (this.players[i].playerId == data.data.playerId) {
+                            this.players[i] = data.data;
+                            break;
+                        }
+                    }
                 }
             });
         return await modal.present();
@@ -102,11 +114,11 @@ export class DuelScreenPage implements OnInit {
         await alert.present();
     }
 
-    async rollDice(duelistName: string) {
+    async rollDice() {
         let roll = 1 + Math.floor(Math.random() * 6);
 
         const alert = await this.alertController.create({
-            header: duelistName + ' rolled: ' + roll,
+            header: 'You rolled: ' + roll,
             buttons: [
                 {
                     text: 'Ok',
@@ -117,7 +129,7 @@ export class DuelScreenPage implements OnInit {
         await alert.present();
     }
 
-    async coinFlip(duelistName: string) {
+    async coinFlip() {
         let coin = Math.round(Math.random());
         let result;
         if (coin == 1) {
@@ -127,7 +139,7 @@ export class DuelScreenPage implements OnInit {
         }
 
         const alert = await this.alertController.create({
-            header: duelistName + ' tossed: ' + result,
+            header: 'You tossed: ' + result,
             buttons: [
                 {
                     text: 'Ok',
@@ -145,5 +157,4 @@ export class DuelScreenPage implements OnInit {
 
     ngOnInit() {
     }
-
 }

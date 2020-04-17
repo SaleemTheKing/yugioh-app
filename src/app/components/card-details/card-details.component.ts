@@ -13,7 +13,6 @@ export class CardDetailsComponent implements OnInit {
 
     constructor(navParams: NavParams) {
         this.card = navParams.get('card');
-        console.log(this.card);
     }
 
     ngOnInit() {

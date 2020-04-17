@@ -53,8 +53,8 @@ export class NumpadComponent implements OnInit {
         this.digitString = this.digitString.slice(0, -1);
     }
 
-    calculate(){
-        let duelist = this.duelScreenPage.players[this.player.playerId - 1];
+    calculate() {
+        let duelist = this.player;
         let digits = parseInt(this.digitString);
         if (this.operationString == '+') {
             duelist.lifePoints += digits;
@@ -63,10 +63,17 @@ export class NumpadComponent implements OnInit {
         } else if (this.operationString == '/') {
             duelist.lifePoints = Math.round((duelist.lifePoints / digits));
         }
-        if(duelist.lifePoints < 0) {
+        if (duelist.lifePoints < 0) {
             duelist.lifePoints = 0;
         }
-        this.duelScreenPage.players[this.player.playerId - 1].lifePoints = duelist.lifePoints;
+        this.duelScreenPage.players[this.player.playerId].lifePoints = duelist.lifePoints;
+
+        for (let i = 0; i < this.duelScreenPage.players[i].length; i++) {
+            if (this.duelScreenPage.players[i].playerId == duelist.playerId) {
+                this.duelScreenPage.players[i] = duelist;
+                break;
+            }
+        }
         this.modalCtrl.dismiss(duelist);
     }
 

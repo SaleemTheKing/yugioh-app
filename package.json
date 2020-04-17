@@ -1,8 +1,8 @@
 {
   "name": "yugioh-v2",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "1.0.0",
+  "author": "Saleem Sarwar",
+  "homepage": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,11 +28,13 @@
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.1.0",
+    "cordova-promise-polyfill": "0.0.2",
     "core-js": "^2.5.4",
     "jquery": "^3.5.0",
     "jquery-textfill": "^0.6.0",
     "ngx-countdown": "^9.0.0",
     "rxjs": "~6.5.1",
+    "rxjs-compat": "^6.5.5",
     "tslib": "^1.9.0",
     "typescript-string-operations": "^1.3.2",
     "zone.js": "~0.9.1"
@@ -67,7 +69,7 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project",
+  "description": "Yugioh calculator",
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},

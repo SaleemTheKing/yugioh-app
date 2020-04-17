@@ -63,4 +63,19 @@
 }
 
 .topButtons {
+  transform: rotateZ(180deg);
+}
+
+.team1 {
+  background-color: #fc4747;
+  color: #FFF;
+}
+
+.team2 {
+  background-color: #4a65ff;
+  color: #FFF;
+}
+
+.teamText {
+  margin: 0;
 }

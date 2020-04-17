@@ -24,7 +24,7 @@
         <ion-toggle [checked]="timeLimitEnabled" (ionChange)="enableTimeLimit($event)"></ion-toggle>
     </ion-item>
 
-    <ion-item *ngIf="playerAmount > 2">
+    <ion-item *ngIf="playerAmount == 4">
         <ion-label>Teams enabled</ion-label>
         <ion-toggle [checked]="teamsEnabled" (ionChange)="setTeam($event)"></ion-toggle>
     </ion-item>
@@ -41,16 +41,21 @@
                    placeholder="Amount in minutes (min 5)"></ion-input>
     </ion-item>
 
+
     <ion-list style="margin: 0; padding: 0;">
-        <div *ngFor="let name of names">
-            <ion-item *ngIf="name.playerId <= playerAmount">
-                <ion-label position="floating">Duelist {{name.playerId}} name</ion-label>
-                <ion-input (ionBlur)="setName($event, name.playerId)" type="text" [value]="name.name"
-                           placeholder="Name">
-                </ion-input>
-                <ion-icon slot="end" style="margin-top: 15px; " name="player-{{name.playerId}}"></ion-icon>
-            </ion-item>
-        </div>
+        <ion-reorder-group (ionItemReorder)="sortTeam($event)">
+            <div *ngFor="let name of names">
+                <ion-item *ngIf="name.playerId <= playerAmount">
+                    <ion-reorder class="sorter" style="margin-top: 10px" slot="start" [hidden]="!(teamsEnabled && playerAmount == 4)"></ion-reorder>
+                    <ion-label [hidden]="(teamsEnabled && playerAmount == 4)" position="floating">Duelist {{name.playerId}} name</ion-label>
+                    <ion-label [hidden]="!(teamsEnabled && playerAmount == 4)" position="floating">Team {{name.team}}</ion-label>
+                    <ion-input (ionBlur)="setName($event, name.playerId)" type="text" [value]="name.name"
+                               placeholder="Name">
+                    </ion-input>
+                    <ion-icon [hidden]="(teamsEnabled && playerAmount == 4)" slot="end" style="margin-top: 15px; font-size: 25px" name="player-{{name.playerId}}"></ion-icon>
+                </ion-item>
+            </div>
+        </ion-reorder-group>
     </ion-list>
 
 </ion-content>
