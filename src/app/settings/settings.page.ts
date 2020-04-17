@@ -111,10 +111,16 @@ export class SettingsPage {
         this.storage.set('timeLimit', this.timeLimit);
     }
 
-    setTeam(event: any) {
+    enableTeams(event: any) {
         this.teamsEnabled = event.target.checked;
-        this.storage.set('teamsEnabled', this.teamsEnabled);
+
+        if (!event.target.checked) {
+            this.names.sort((a, b) => (a.playerId > b.playerId) ? 1 : -1);
+        }
+
+
         this.unlockSorting();
+        this.storage.set('teamsEnabled', this.teamsEnabled);
     }
 
     enableTimeLimit(event: any) {
@@ -129,9 +135,9 @@ export class SettingsPage {
 
         for (let i = 0; i < this.names.length; i++) {
             if (i <= 1) {
-              this.names[i].team = 1;
+                this.names[i].team = 1;
             } else {
-              this.names[i].team = 2;
+                this.names[i].team = 2;
             }
         }
         this.storage.set('names', this.names);
@@ -140,4 +146,5 @@ export class SettingsPage {
     unlockSorting() {
         this.reorderGroup.disabled = !(this.playerAmount == 4 && this.teamsEnabled);
     }
+
 }
