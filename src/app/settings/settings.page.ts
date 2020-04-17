@@ -119,6 +119,7 @@ export class SettingsPage {
 
     enableTeams(event: any) {
         this.teamsEnabled = event.target.checked;
+        console.log(this.teamsEnabled);
 
         if (!event.target.checked) {
             this.sortNames();

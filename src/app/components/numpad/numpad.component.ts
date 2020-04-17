@@ -66,15 +66,13 @@ export class NumpadComponent implements OnInit {
         if (duelist.lifePoints < 0) {
             duelist.lifePoints = 0;
         }
-        this.duelScreenPage.players[this.player.playerId].lifePoints = duelist.lifePoints;
-
         for (let i = 0; i < this.duelScreenPage.players[i].length; i++) {
             if (this.duelScreenPage.players[i].playerId == duelist.playerId) {
                 this.duelScreenPage.players[i] = duelist;
                 break;
             }
         }
-        this.modalCtrl.dismiss(duelist);
+        this.modalCtrl.dismiss();
     }
 
 }

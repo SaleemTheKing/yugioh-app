@@ -60,18 +60,6 @@ export class DuelScreenPage implements OnInit {
             component: NumpadComponent,
             cssClass: 'modal'
         });
-        modal.onDidDismiss()
-            .then((data) => {
-                if (data.data != null) {
-                    // this.players[player.playerId - 1] = data.data;
-                    for (let i = 0; i < this.players.length; i++) {
-                        if (this.players[i].playerId == data.data.playerId) {
-                            this.players[i] = data.data;
-                            break;
-                        }
-                    }
-                }
-            });
         return await modal.present();
     }
 
@@ -81,17 +69,6 @@ export class DuelScreenPage implements OnInit {
             component: NumpadUpsidedownComponent,
             cssClass: 'modalUpsideDown'
         });
-        modal.onDidDismiss()
-            .then((data) => {
-                if (data.data != null) {
-                    for (let i = 0; i < this.players.length; i++) {
-                        if (this.players[i].playerId == data.data.playerId) {
-                            this.players[i] = data.data;
-                            break;
-                        }
-                    }
-                }
-            });
         return await modal.present();
     }
 

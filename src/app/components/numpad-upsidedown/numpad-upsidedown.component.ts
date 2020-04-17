@@ -71,7 +71,7 @@ export class NumpadUpsidedownComponent implements OnInit {
                 break;
             }
         }
-        this.modalCtrl.dismiss(duelist);
+        this.modalCtrl.dismiss();
     }
 
 }
