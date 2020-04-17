@@ -81,6 +81,12 @@ export class SettingsPage {
 
     setPlayers(event: any) {
         this.playerAmount = event.target.value;
+
+        if (this.playerAmount != 4) {
+            this.sortNames();
+            this.enableTeams({target: {value: false}});
+        }
+
         this.storage.set('playerAmount', this.playerAmount);
 
         this.unlockSorting();
@@ -115,7 +121,7 @@ export class SettingsPage {
         this.teamsEnabled = event.target.checked;
 
         if (!event.target.checked) {
-            this.names.sort((a, b) => (a.playerId > b.playerId) ? 1 : -1);
+            this.sortNames();
         }
 
 
@@ -145,6 +151,10 @@ export class SettingsPage {
 
     unlockSorting() {
         this.reorderGroup.disabled = !(this.playerAmount == 4 && this.teamsEnabled);
+    }
+
+    sortNames() {
+        this.names = this.names.sort((a, b) => (a.playerId > b.playerId) ? 1 : -1);
     }
 
 }
