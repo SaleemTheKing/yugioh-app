@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {String} from 'typescript-string-operations';
 import {CardslistService} from '../services/cardslist/cardslist.service';
 import {Router} from '@angular/router';
+import {AlertController} from '@ionic/angular';
 
 @Component({
     selector: 'app-card-search',
@@ -41,6 +42,7 @@ export class CardSearchPage {
     ];
 
     monsterType = [
+        {type: 'All'},
         {type: 'Warrior'},
         {type: 'Spellcaster'},
         {type: 'Fairy'},
@@ -69,6 +71,7 @@ export class CardSearchPage {
     ];
 
     level = [
+        {level: 'All'},
         {level: '1'},
         {level: '2'},
         {level: '3'},
@@ -84,6 +87,7 @@ export class CardSearchPage {
     ];
 
     levelRange = [
+        {range: 'All', query: ''},
         {range: 'Equals', query: ''},
         {range: 'Greater Than', query: 'gte'},
         {range: 'Less Than', query: 'lte'},
@@ -132,7 +136,7 @@ export class CardSearchPage {
     constructor(public http: HttpClient,
                 public cardsList: CardslistService,
                 public router: Router,
-    ) {
+                public alertCtrl: AlertController,) {
     }
 
 
@@ -193,16 +197,16 @@ export class CardSearchPage {
                     queries = queries.concat(String.Format('&type={0}', this.selectedMonsterFrame));
                 }
 
-                if (this.selectedMonsterAtt != null) {
+                if (this.selectedMonsterAtt != null && this.selectedMonsterAtt != 'All') {
                     queries = queries.concat(String.Format('&attribute={0}', this.selectedMonsterAtt));
                 }
 
-                if (this.selectedMonsterType != null) {
+                if (this.selectedMonsterType != null && this.selectedMonsterType != 'All') {
                     queries = queries.concat(String.Format('&race={0}', this.selectedMonsterType));
                 }
 
-                if (this.selectedLevel != null && this.selectedLevelRange != null) {
-                    if (this.selectedLevelRange != '') {
+                if (this.selectedLevel != null && this.selectedLevel != 'All') {
+                    if (this.selectedLevelRange != '' || this.selectedLevelRange != null) {
                         queries = queries.concat(String.Format('&level={0}{1}', this.selectedLevelRange, this.selectedLevel));
                     } else {
                         queries = queries.concat(String.Format('&level={0}', this.selectedLevel));
@@ -223,8 +227,17 @@ export class CardSearchPage {
         }
 
         this.http.get(url).subscribe(data => {
-            this.cardsList.cardsList = data;
-            this.router.navigate(['/search-results']);
-        });
+                this.cardsList.cardsList = data;
+                this.router.navigate(['/search-results']);
+            },
+            async error => {
+                let alert = await this.alertCtrl.create({
+                    message: 'No cards found',
+                    buttons: ['Ok']
+                });
+
+                await alert.present();
+            }
+        );
     }
 }

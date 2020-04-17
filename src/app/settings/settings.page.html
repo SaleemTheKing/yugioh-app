@@ -46,7 +46,7 @@
         <ion-reorder-group (ionItemReorder)="sortTeam($event)">
             <div *ngFor="let name of names">
                 <ion-item *ngIf="name.playerId <= playerAmount">
-                    <ion-reorder class="sorter" style="margin-top: 10px" slot="start" [hidden]="!(teamsEnabled && playerAmount == 4)"></ion-reorder>
+                    <ion-reorder style="margin-top: 10px" slot="start" [hidden]="!(teamsEnabled && playerAmount == 4)"></ion-reorder>
                     <ion-label [hidden]="(teamsEnabled && playerAmount == 4)" position="floating">Duelist {{name.playerId}} name</ion-label>
                     <ion-label [hidden]="!(teamsEnabled && playerAmount == 4)" position="floating">Team {{name.team}}</ion-label>
                     <ion-input (ionBlur)="setName($event, name.playerId)" type="text" [value]="name.name"

@@ -15,10 +15,10 @@ import {CountdownComponent} from 'ngx-countdown';
 
 export class DuelScreenPage implements OnInit {
 
-
     players: any;
     seconds: number = 0;
     false;
+
     @ViewChild('timer', {static: false}) private countdown: CountdownComponent;
 
     constructor(public settings: SettingsPage,

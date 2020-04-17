@@ -119,12 +119,10 @@ export class SettingsPage {
 
     enableTeams(event: any) {
         this.teamsEnabled = event.target.checked;
-        console.log(this.teamsEnabled);
 
         if (!event.target.checked) {
             this.sortNames();
         }
-
 
         this.unlockSorting();
         this.storage.set('teamsEnabled', this.teamsEnabled);
@@ -156,6 +154,7 @@ export class SettingsPage {
 
     sortNames() {
         this.names = this.names.sort((a, b) => (a.playerId > b.playerId) ? 1 : -1);
+        this.storage.set('names', this.names);
     }
 
 }

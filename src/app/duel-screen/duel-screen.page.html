@@ -116,30 +116,32 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
-                <ion-col class="centerText">
-                    <h3 class="teamText">Team 1</h3>
-                </ion-col>
-            </ion-row>
+            <span *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
+                <ion-row>
+                    <ion-col class="centerText">
+                        <h3 class="teamText">Team 1</h3>
+                    </ion-col>
+                </ion-row>
 
-            <ion-row *ngIf="settings.teamsEnabled && settings.playerAmount == 4">
-                <ion-col>
-                    <div class="divCenterContent">
-                        <ion-card button (click)="openCalculator(players[0])" class="card2player-1 team1">
-                            <h4 class="nameText">{{players[0].name}}</h4>
-                            <h4 class="info">{{players[0].lifePoints}}</h4>
-                        </ion-card>
-                    </div>
-                </ion-col>
-                <ion-col>
-                    <div class="divCenterContent">
-                        <ion-card button (click)="openCalculator(players[1])" class="card2player-1 team1">
-                            <h4 class="nameText">{{players[1].name}}</h4>
-                            <h4 class="info">{{players[1].lifePoints}}</h4>
-                        </ion-card>
-                    </div>
-                </ion-col>
-            </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="divCenterContent">
+                            <ion-card button (click)="openCalculator(players[0])" class="card2player-1 team1">
+                                <h4 class="nameText">{{players[0].name}}</h4>
+                                <h4 class="info">{{players[0].lifePoints}}</h4>
+                            </ion-card>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="divCenterContent">
+                            <ion-card button (click)="openCalculator(players[1])" class="card2player-1 team1">
+                                <h4 class="nameText">{{players[1].name}}</h4>
+                                <h4 class="info">{{players[1].lifePoints}}</h4>
+                            </ion-card>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </span>
 
             <ion-row>
                 <ion-col class="info">
