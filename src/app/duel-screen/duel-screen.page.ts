@@ -5,6 +5,8 @@ import {NumpadComponent} from '../components/numpad/numpad.component';
 import {PlayerService} from '../services/player/player.service';
 import {NumpadUpsidedownComponent} from '../components/numpad-upsidedown/numpad-upsidedown.component';
 import {CountdownComponent} from 'ngx-countdown';
+import {HttpClient} from '@angular/common/http';
+import {String} from 'typescript-string-operations';
 
 @Component({
     selector: 'app-duel-screen',
@@ -18,13 +20,16 @@ export class DuelScreenPage implements OnInit {
     players: any;
     seconds: number = 0;
     false;
+    randomCardUrl: string;
+    foundRandomCard: boolean = false;
 
     @ViewChild('timer', {static: false}) private countdown: CountdownComponent;
 
     constructor(public settings: SettingsPage,
                 public modalCtrl: ModalController,
                 public playerService: PlayerService,
-                public alertController: AlertController) {
+                public alertController: AlertController,
+                public http: HttpClient,) {
         settings.getData();
         this.setupGame();
     }
@@ -127,9 +132,24 @@ export class DuelScreenPage implements OnInit {
         await alert.present();
     }
 
+    randomCard() {
+        let randomCardData;
+        this.http.get('https://db.ygoprodeck.com/api/v7/randomcard.php')
+            .subscribe(card => {
+                randomCardData = card;
+                this.foundRandomCard = true;
+                this.randomCardUrl = String.Format('https://storage.googleapis.com/ygoprodeck.com/pics/{0}', randomCardData.id);
+            }, error => {
+                if (error.status != 200) {
+                    console.log("Error on requesting data", "Status:", error.status);
+                }
+            });
+    }
+
     ionViewWillEnter() {
         this.settings.getData();
         this.setupGame();
+        this.randomCard();
     }
 
     ngOnInit() {

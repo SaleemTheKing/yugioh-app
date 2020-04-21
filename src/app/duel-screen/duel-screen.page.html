@@ -79,22 +79,15 @@
                            [config]="{leftTime: seconds}"></countdown>
             </ion-row>
 
-            <ion-row *ngIf="!settings.timeLimitEnabled && settings.teamsEnabled">
-                <ion-col>
-                    <div style="margin: 30%"></div>
+            <ion-row *ngIf="!settings.timeLimitEnabled">
+                <ion-col></ion-col>
+                <ion-col [hidden]="!foundRandomCard">
+                    <ion-img src="{{randomCardUrl}}"></ion-img>
                 </ion-col>
-            </ion-row>
-
-            <ion-row *ngIf="!settings.timeLimitEnabled && !settings.teamsEnabled">
-                <ion-col>
-                    <div style="margin: 70%"></div>
+                <ion-col [hidden]="foundRandomCard" class="centerText">
+                    <ion-spinner color="primary" name="bubbles"></ion-spinner>
                 </ion-col>
-            </ion-row>
-
-            <ion-row *ngIf="!settings.timeLimitEnabled && settings.teamsEnabled">
-                <ion-col>
-                    <div style="margin: 20%"></div>
-                </ion-col>
+                <ion-col></ion-col>
             </ion-row>
 
             <ion-row *ngIf="!settings.teamsEnabled">
