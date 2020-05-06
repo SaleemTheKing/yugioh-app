@@ -95,7 +95,7 @@ export class DuelScreenPage implements OnInit {
         this.playerService.selectedPlayer = player;
         const modal = await this.modalCtrl.create({
             component: NumpadComponent,
-            cssClass: 'modal'
+            cssClass: 'modalCalculator'
         });
         return await modal.present();
     }
@@ -184,6 +184,10 @@ export class DuelScreenPage implements OnInit {
         this.settings.getData();
         this.setupGame();
         this.randomCard();
+    }
+
+    ionViewWillLeave() {
+        this.admobFree.banner.hide();
     }
 
     ngOnInit() {

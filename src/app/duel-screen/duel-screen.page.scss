@@ -6,6 +6,7 @@
 }
 
 .info {
+  padding-bottom:5px;
   font-size: 3.3rem;
   text-align: center;
   display: flex;
@@ -24,12 +25,12 @@
 
 .card2player-1 {
   width: 140px;
-  height: 100px;
+  height: 105px;
 }
 
 .card2player-2 {
   width: 140px;
-  height: 100px;
+  height: 105px;
   transform: rotateZ(180deg);
 }
 
@@ -37,7 +38,7 @@
   position: relative;
   left: 0;
   right: 0;
-  margin: 50px auto;
+  margin: 20px auto;
   text-align: center;
   font-size: 5rem;
   font-weight: lighter;
