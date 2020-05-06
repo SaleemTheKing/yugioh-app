@@ -48,9 +48,23 @@ export class DuelScreenPage implements OnInit {
         this.seconds = this.settings.timeLimit * 60;
     }
 
-    resetTimer() {
-        this.countdown.restart();
-        document.getElementById('timer').classList.remove('timer--expired');
+    async resetTimer() {
+        const alert = await this.alertController.create({
+            header: 'Reset Timer?',
+            buttons: [
+                {
+                    text: 'No',
+                    role: 'cancel',
+                }, {
+                    text: 'Yes',
+                    handler: () => {
+                        this.countdown.restart();
+                        document.getElementById('timer').classList.remove('timer--expired');
+                    }
+                }
+            ]
+        });
+        await alert.present();
     }
 
     alert(ev: any) {
@@ -88,7 +102,9 @@ export class DuelScreenPage implements OnInit {
                     text: 'Yes',
                     handler: () => {
                         this.setupGame();
-                        this.resetTimer();
+                        if (this.settings.timeLimitEnabled) {
+                            this.resetTimer();
+                        }
                     }
                 }
             ]
@@ -138,7 +154,7 @@ export class DuelScreenPage implements OnInit {
             .subscribe(card => {
                 randomCardData = card;
                 this.foundRandomCard = true;
-                this.randomCardUrl = String.Format('https://storage.googleapis.com/ygoprodeck.com/pics/{0}', randomCardData.id);
+                this.randomCardUrl = String.Format('https://storage.googleapis.com/ygoprodeck.com/pics/{0}.jpg', randomCardData.id);
             }, error => {
                 if (error.status != 200) {
                     console.log("Error on requesting data", "Status:", error.status);

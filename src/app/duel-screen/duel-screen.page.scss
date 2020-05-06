@@ -6,7 +6,15 @@
 }
 
 .info {
-  font-size: 2rem;
+  font-size: 3.3rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+}
+
+.buttonsColumn {
   text-align: center;
   display: flex;
   align-items: center;
@@ -16,10 +24,12 @@
 
 .card2player-1 {
   width: 140px;
+  height: 100px;
 }
 
 .card2player-2 {
   width: 140px;
+  height: 100px;
   transform: rotateZ(180deg);
 }
 

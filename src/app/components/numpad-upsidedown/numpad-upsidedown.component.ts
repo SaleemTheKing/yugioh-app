@@ -71,7 +71,21 @@ export class NumpadUpsidedownComponent implements OnInit {
                 break;
             }
         }
-        this.modalCtrl.dismiss();
+        this.modalCtrl.dismiss().then(window => {
+                let infoPanels = document.getElementsByClassName('info');
+                for (let i = 0; i < infoPanels.length; i++) {
+                    if (duelist.lifePoints == infoPanels[i].innerHTML) {
+                        if (duelist.lifePoints.toString().length <= 4) {
+                            infoPanels[i].style.fontSize = '3.3rem';
+                        } else if (duelist.lifePoints.toString().length == 5) {
+                            infoPanels[i].style.fontSize = '3rem';
+                        } else if (duelist.lifePoints.toString().length >= 6) {
+                            infoPanels[i].style.fontSize = '2.5rem';
+                        }
+                    }
+                }
+            }
+        );
     }
 
 }
