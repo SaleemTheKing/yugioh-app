@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Storage} from '@ionic/storage';
-import {IonReorderGroup} from '@ionic/angular';
+import {IonReorderGroup, LoadingController} from '@ionic/angular';
 
 @Component({
     selector: 'app-settings',
@@ -33,7 +33,8 @@ export class SettingsPage {
         {playerId: 4, name: 'Duelist 4', team: 2, lifePoints: 0}
     ];
 
-    constructor(public storage: Storage) {
+    constructor(public storage: Storage,
+                public loadingCtrl: LoadingController) {
     }
 
     ionViewWillEnter() {
@@ -155,6 +156,41 @@ export class SettingsPage {
     sortNames() {
         this.names = this.names.sort((a, b) => (a.playerId > b.playerId) ? 1 : -1);
         this.storage.set('names', this.names);
+    }
+
+
+    saveData() {
+        this.storage.set('names', this.names);
+        this.storage.set('names', this.names);
+        this.storage.set('timeLimitEnabled', this.timeLimitEnabled);
+        this.storage.set('timeLimit', this.timeLimit);
+        this.storage.set('lifePoints', this.lifePoints);
+        this.storage.set('names', this.names);
+        this.storage.set('playerAmount', this.playerAmount);
+        if (this.playerAmount != 4) {
+            this.storage.set('teamsEnabled', false);
+        } else {
+            this.storage.set('teamsEnabled', this.teamsEnabled);
+        }
+    }
+
+
+    async saveSettings() {
+        this.saveData();
+        let loading = await this.loadingCtrl.create({
+            message: 'Saving Settings...',
+            spinner: 'bubbles'
+        });
+
+        await loading.present();
+
+        setTimeout(() => {
+            loading.dismiss();
+        }, 250);
+    }
+
+    ionViewWillLeave() {
+        this.saveSettings();
     }
 
 }
