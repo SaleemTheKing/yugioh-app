@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
-import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
@@ -17,8 +17,7 @@ import {NumpadUpsidedownComponent} from './components/numpad-upsidedown/numpad-u
 import {CountdownComponent, CountdownGlobalConfig, CountdownModule} from 'ngx-countdown';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {CardDetailsComponent} from './components/card-details/card-details.component';
-import {CardslistService} from './services/cardslist/cardslist.service';
-import {PlayerService} from './services/player/player.service';
+import {AdMobFree} from '@ionic-native/admob-free/ngx';
 
 @NgModule({
     declarations: [AppComponent, NumpadComponent, NumpadUpsidedownComponent, CardDetailsComponent],
@@ -43,6 +42,7 @@ import {PlayerService} from './services/player/player.service';
         NumpadUpsidedownComponent,
         HttpClient,
         CountdownGlobalConfig,
+        AdMobFree,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

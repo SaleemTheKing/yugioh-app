@@ -7,6 +7,7 @@ import {NumpadUpsidedownComponent} from '../components/numpad-upsidedown/numpad-
 import {CountdownComponent} from 'ngx-countdown';
 import {HttpClient} from '@angular/common/http';
 import {String} from 'typescript-string-operations';
+import {AdMobFree, AdMobFreeBannerConfig} from '@ionic-native/admob-free/ngx';
 
 @Component({
     selector: 'app-duel-screen',
@@ -29,9 +30,26 @@ export class DuelScreenPage implements OnInit {
                 public modalCtrl: ModalController,
                 public playerService: PlayerService,
                 public alertController: AlertController,
-                public http: HttpClient,) {
+                public http: HttpClient,
+                private admobFree: AdMobFree) {
         settings.getData();
         this.setupGame();
+
+        const bannerConfig: AdMobFreeBannerConfig = {
+            // add your config here
+            // for the sake of this example we will just use the test config
+            id: 'ca-app-pub-3413819043339820/6734598730',
+            isTesting: false,
+            autoShow: true
+        };
+        this.admobFree.banner.config(bannerConfig);
+
+        this.admobFree.banner.prepare()
+            .then(() => {
+                // banner Ad is ready
+                // if we set autoShow to false, then we will need to call the show method here
+            })
+            .catch(e => console.log(e));
     }
 
     setupGame() {
@@ -157,7 +175,7 @@ export class DuelScreenPage implements OnInit {
                 this.randomCardUrl = String.Format('https://storage.googleapis.com/ygoprodeck.com/pics/{0}.jpg', randomCardData.id);
             }, error => {
                 if (error.status != 200) {
-                    console.log("Error on requesting data", "Status:", error.status);
+                    console.log('Error on requesting data', 'Status:', error.status);
                 }
             });
     }

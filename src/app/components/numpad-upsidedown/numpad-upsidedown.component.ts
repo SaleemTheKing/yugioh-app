@@ -72,7 +72,7 @@ export class NumpadUpsidedownComponent implements OnInit {
             }
         }
         this.modalCtrl.dismiss().then(window => {
-                let infoPanels = document.getElementsByClassName('info');
+                let infoPanels = document.getElementsByClassName('info') as HTMLCollectionOf<HTMLElement>;
                 for (let i = 0; i < infoPanels.length; i++) {
                     if (duelist.lifePoints == infoPanels[i].innerHTML) {
                         if (duelist.lifePoints.toString().length <= 4) {
