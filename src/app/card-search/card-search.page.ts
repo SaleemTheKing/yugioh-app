@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {String} from 'typescript-string-operations';
 import {CardslistService} from '../services/cardslist/cardslist.service';
 import {Router} from '@angular/router';
-import {AlertController} from '@ionic/angular';
+import {AlertController, LoadingController} from '@ionic/angular';
 
 @Component({
     selector: 'app-card-search',
@@ -19,7 +19,7 @@ export class CardSearchPage {
         {frame: 'Fusion', query: 'Fusion Monster'},
         {frame: 'Ritual', query: 'Ritual Monster'},
         {frame: 'Synchro', query: 'Synchro Monster'},
-        {frame: 'Xyz', query: ' XYZ Monster'},
+        {frame: 'Xyz', query: 'XYZ Monster'},
         {frame: 'Pendulum', query: 'Monster'},
         {frame: 'Link', query: 'Link Monster'},
         {frame: 'Tuner', query: 'Tuner Monster'},
@@ -88,7 +88,7 @@ export class CardSearchPage {
 
     levelRange = [
         {range: 'All', query: ''},
-        {range: 'Equals', query: ''},
+        {range: 'Equals', query: 'eq'},
         {range: 'Greater Than', query: 'gte'},
         {range: 'Less Than', query: 'lte'},
     ];
@@ -116,10 +116,8 @@ export class CardSearchPage {
         {category: 'All', query: 'All'},
         {category: 'Monster', query: 'Monster'},
         {category: 'Spell', query: 'Spell Card'},
-        {category: 'Trap', query: 'Trap Card'}];
-
-
-    listOfCards: any = [];
+        {category: 'Trap', query: 'Trap Card'}
+    ];
 
     selectedQuery;
     selectedCategory;
@@ -136,7 +134,8 @@ export class CardSearchPage {
     constructor(public http: HttpClient,
                 public cardsList: CardslistService,
                 public router: Router,
-                public alertCtrl: AlertController,) {
+                public alertCtrl: AlertController,
+                public loadCtrl: LoadingController) {
     }
 
 
@@ -176,68 +175,82 @@ export class CardSearchPage {
         this.selectedQuery = ev.target.value.toLowerCase();
     }
 
+    async load() {
+        let loading = await this.loadCtrl.create({
+            spinner: 'bubbles',
+            message: 'Getting cards...',
+            duration: 5000
+        });
+        await loading.present();
+    }
+
+
     search() {
-        let url = 'https://db.ygoprodeck.com/api/v6/cardinfo.php';
-        let queries = '';
+        this.load().then(() => {
 
-        if (this.selectedCategory != null
-            || this.selectedTrapType != null
-            || this.selectedQuery != null
-            || this.selectedSpellType != null
-            || this.selectedMonsterFrame != null
-            || this.selectedMonsterAtt != null
-            || this.selectedMonsterType != null) {
+            let url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
+            let queries = '';
 
-            if (this.selectedQuery != null) {
-                queries = queries.concat(String.Format('&fname={0}', this.selectedQuery));
-            }
+            if (this.selectedCategory != null
+                || this.selectedTrapType != null
+                || this.selectedQuery != null
+                || this.selectedSpellType != null
+                || this.selectedMonsterFrame != null
+                || this.selectedMonsterAtt != null
+                || this.selectedMonsterType != null) {
 
-            if (this.selectedCategory == 'Monster') {
-                if (this.selectedMonsterFrame != null && this.selectedMonsterFrame != 'All') {
-                    queries = queries.concat(String.Format('&type={0}', this.selectedMonsterFrame));
+                if (this.selectedQuery != null) {
+                    queries = queries.concat(String.Format('&fname={0}', this.selectedQuery));
                 }
 
-                if (this.selectedMonsterAtt != null && this.selectedMonsterAtt != 'All') {
-                    queries = queries.concat(String.Format('&attribute={0}', this.selectedMonsterAtt));
-                }
+                if (this.selectedCategory == 'Monster') {
+                    if (this.selectedMonsterFrame != null && this.selectedMonsterFrame != 'All') {
+                        queries = queries.concat(String.Format('&type={0}', this.selectedMonsterFrame));
+                    }
 
-                if (this.selectedMonsterType != null && this.selectedMonsterType != 'All') {
-                    queries = queries.concat(String.Format('&race={0}', this.selectedMonsterType));
-                }
+                    if (this.selectedMonsterAtt != null && this.selectedMonsterAtt != 'All') {
+                        queries = queries.concat(String.Format('&attribute={0}', this.selectedMonsterAtt));
+                    }
 
-                if (this.selectedLevel != null && this.selectedLevel != 'All') {
-                    if (this.selectedLevelRange != '' || this.selectedLevelRange != null) {
-                        queries = queries.concat(String.Format('&level={0}{1}', this.selectedLevelRange, this.selectedLevel));
-                    } else {
-                        queries = queries.concat(String.Format('&level={0}', this.selectedLevel));
+                    if (this.selectedMonsterType != null && this.selectedMonsterType != 'All') {
+                        queries = queries.concat(String.Format('&race={0}', this.selectedMonsterType));
+                    }
+
+                    if (this.selectedLevel != null && this.selectedLevel != 'All') {
+                        if (this.selectedLevelRange != '' || this.selectedLevelRange != null) {
+                            queries = queries.concat(String.Format('&level={0}{1}', this.selectedLevelRange, this.selectedLevel));
+                        } else {
+                            queries = queries.concat(String.Format('&level={0}', this.selectedLevel));
+                        }
+                    }
+                } else if (this.selectedCategory == 'Spell Card') {
+                    queries = queries.concat(String.Format('&type={0}', this.selectedCategory));
+                    if (this.selectedSpellType != null) {
+                        queries = queries.concat(String.Format('&race={0}', this.selectedSpellType));
+                    }
+                } else if (this.selectedCategory == 'Trap Card') {
+                    queries = queries.concat(String.Format('&type={0}', this.selectedCategory));
+                    if (this.selectedTrapType != null) {
+                        queries = queries.concat(String.Format('&race={0}', this.selectedTrapType));
                     }
                 }
-            } else if (this.selectedCategory == 'Spell Card') {
-                queries = queries.concat(String.Format('&type={0}', this.selectedCategory));
-                if (this.selectedSpellType != null) {
-                    queries = queries.concat(String.Format('&race={0}', this.selectedSpellType));
-                }
-            } else if (this.selectedCategory == 'Trap Card') {
-                queries = queries.concat(String.Format('&type={0}', this.selectedCategory));
-                if (this.selectedTrapType != null) {
-                    queries = queries.concat(String.Format('&race={0}', this.selectedTrapType));
-                }
+                url = url.concat(queries).replace(/&/i, '?').replace(/ /g, '%20').toLowerCase();
             }
-            url = url.concat(queries).replace(/&/i, '?').replace(/ /g, '%20').toLowerCase();
-        }
 
-        this.http.get(url).subscribe(data => {
-                this.cardsList.cardsList = data;
-                this.router.navigate(['/search-results']);
-            },
-            async error => {
-                let alert = await this.alertCtrl.create({
-                    message: 'No cards found',
-                    buttons: ['Ok']
-                });
+            this.http.get(url).subscribe(data => {
+                    this.cardsList.cardsList = data;
+                    this.loadCtrl.dismiss();
+                    this.router.navigate(['/search-results']);
+                },
+                async error => {
+                    let alert = await this.alertCtrl.create({
+                        message: 'No cards found',
+                        buttons: ['Ok']
+                    });
 
-                await alert.present();
-            }
-        );
+                    await alert.present();
+                }
+            );
+        });
     }
 }

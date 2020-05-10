@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CardslistService} from '../services/cardslist/cardslist.service';
-import {LoadingController, ModalController} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
 import {CardDetailsComponent} from '../components/card-details/card-details.component';
 
 @Component({
@@ -13,17 +13,9 @@ export class SearchResultsPage implements OnInit {
     public list;
 
     constructor(public cardList: CardslistService,
-                public loadCtrl: LoadingController,
                 public modalCtrl: ModalController,) {
-        this.list = this.cardList.cardsList;
-    }
+        this.list = this.cardList.cardsList['data'];
 
-    async load() {
-        let loading = await this.loadCtrl.create({
-            spinner: 'bubbles',
-            message: 'Getting cards...'
-        });
-        await loading.present();
     }
 
     ngOnInit() {
